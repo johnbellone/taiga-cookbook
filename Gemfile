@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 gem 'berkshelf'
+gem 'chef-sugar'
 gem 'rake'
 gem 'coveralls', require: false
 

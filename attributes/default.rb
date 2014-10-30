@@ -5,3 +5,4 @@
 #
 default['taiga']['user'] = 'taiga'
 default['taiga']['group'] = 'taiga'
+default['taiga']['ruby_version'] = 'ruby 2.1.3'
