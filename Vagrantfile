@@ -15,10 +15,10 @@ Vagrant.configure('2') do |config|
     vw.vmx['numvcpus'] = ENV.fetch('VAGRANT_VM_MEMORY', 2)
   end if Vagrant.has_plugin?('vagrant-vmware-fusion')
 
-  config.vm.define :taiga, primary: true do |guest|
+  config.vm.define :aio, primary: true do |guest|
     guest.vm.network :private_network, ip: '33.33.33.10'
     guest.vm.provision :chef_solo do |chef|
-      chef.run_list = %w(recipe[taiga::default])
+      chef.run_list = %w(recipe[taiga] recipe[taiga::backend] recipe[taiga::frontend])
       chef.json = {
         dev_mode: true
       }
