@@ -5,4 +5,11 @@
 #
 default['taiga']['user'] = 'taiga'
 default['taiga']['group'] = 'taiga'
-default['taiga']['ruby_version'] = 'ruby 2.1.3'
+
+default['taiga']['front']['path'] = '/srv/taiga-front'
+default['taiga']['front']['git_url'] = 'https://github.com/taigaio/taiga-front'
+default['taiga']['front']['git_ref'] = 'master'
+
+default['taiga']['back']['path'] = '/srv/taiga-back'
+default['taiga']['back']['git_url'] = 'https://github.com/taigaio/taiga-back'
+default['taiga']['back']['git_ref'] = 'master'

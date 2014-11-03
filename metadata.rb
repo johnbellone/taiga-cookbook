@@ -1,5 +1,5 @@
 name             'taiga'
-maintainer       'John Bellone (<jbellone@bloomberg.net>)'
+maintainer       'John Bellone'
 maintainer_email 'jbellone@bloomberg.net'
 license          'Apache 2.0'
 description      'Installs/configures Taiga project management platform.'
@@ -15,9 +15,10 @@ supports 'ubuntu', '~> 14.04'
 end
 
 depends 'chef-sugar'
-depends 'chruby'
 depends 'nginx'
 depends 'nodejs'
 depends 'postgresql'
+depends 'puma'
 depends 'python'
 depends 'redisio'
+depends 'ruby-install'

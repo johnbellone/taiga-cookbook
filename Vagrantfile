@@ -1,7 +1,7 @@
 Vagrant.configure('2') do |config|
   config.berkshelf.enabled = true if Vagrant.has_plugin?('vagrant-berkshelf')
   config.omnibus.chef_version = :latest if Vagrant.has_plugin?('vagrant-omnibus')
-  config.cache.scope = :box if Vagrant.has_plugin?('vagrant-cachier')
+  config.cache.auto_detect = true if Vagrant.has_plugin?('vagrant-cachier')
 
   config.vm.box = ENV.fetch('VAGRANT_VM_BOX', 'opscode-ubuntu-14.04')
 
