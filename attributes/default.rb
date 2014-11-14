@@ -6,6 +6,8 @@
 default['taiga']['user'] = 'taiga'
 default['taiga']['group'] = 'taiga'
 
+default['taiga']['site_environment'] = 'production'
+
 default['taiga']['front']['git_url'] = 'https://github.com/taigaio/taiga-front'
 default['taiga']['front']['git_ref'] = 'master'
 
