@@ -1,3 +1,8 @@
+#
+# Cookbook Name:: taiga
+# Recipe:: backend
+# License:: Apache 2.0 (see http://www.apache.org/licenses/LICENSE-2.0)
+#
 include_recipe 'postgresql::client'
 
 node.default['python']['version'] = '3.4.2'
