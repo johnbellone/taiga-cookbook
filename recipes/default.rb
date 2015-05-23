@@ -1,14 +1,10 @@
 #
-# Cookbook Name:: taiga
-# Recipe:: default
-# License:: Apache 2.0 (see http://www.apache.org/licenses/LICENSE-2.0)
+# Cookbook: taiga
+# License: Apache 2.0
 #
-include_recipe 'chef-sugar::default'
+# Copyright 2014, 2015, Bloomberg Finance L.P.
+#
 
-group node['taiga']['group'] do
-  system true
-end
-
-user node['taiga']['user'] do
-  gid node['taiga']['group']
+poise_service_user node['taiga']['service_user'] do
+  group node['taiga']['service_group']
 end

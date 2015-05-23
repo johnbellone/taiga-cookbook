@@ -1,51 +1,40 @@
 #
-# Cookbook Name:: taiga
-# Recipe:: frontend
-# License:: Apache 2.0 (see http://www.apache.org/licenses/LICENSE-2.0)
+# Cookbook: taiga
+# License: Apache 2.0
+#
+# Copyright 2014, 2015, Bloomberg Finance L.P.
 #
 include_recipe 'nodejs::default'
-
-nodejs_npm 'bower'
-nodejs_npm 'gulp'
-nodejs_npm 'sass'
-nodejs_npm 'scss-lint'
-
-root_path = ::File.join('/home', node['taiga']['user'], 'taiga-front')
-directory root_path do
-  owner node['taiga']['user']
-  group node['taiga']['group']
-  recursive true
-  not_if { ::Dir.exist?(root_path) }
+%w(bower gulp sass scss-lint).each do |name|
+  nodejs_npm name
 end
 
-git root_path do
-  repository node['taiga']['front']['git_url']
-  reference node['taiga']['front']['git_ref']
-  user node['taiga']['user']
-  group node['taiga']['group']
-  action :checkout
+artifact = libartifact_file 'taiga-front' do
+  artifact_name 'taiga-front'
+  artifact_version node['taiga']['source_version']
+  owner node['taiga']['service_user']
+  group node['taiga']['service_group']
+  notifies :run, 'execute[npm install]', :delayed
+  notifies :run, 'execute[bower install]', :delayed
+  notifies :run, 'execute[gulp deploy]', :delayed
 end
 
-directory ::File.join(root_path, 'conf') do
-  owner node['taiga']['user']
-  group node['taiga']['group']
-  recursive true
-  not_if { ::Dir.exist?(::File.join(root_path, 'conf')) }
+directory File.join(artifact.path, 'conf') do
+  owner node['taiga']['service_user']
+  group node['taiga']['service_group']
 end
-
-# TODO: Write out the conf/main.json file for configuration.
 
 execute 'npm install' do
-  cwd root_path
-  user node['taiga']['user']
+  action :nothing
+  user node['taiga']['service_user']
 end
 
 execute 'bower install' do
-  cwd root_path
-  user node['taiga']['user']
+  action :nothing
+  user node['taiga']['service_user']
 end
 
-execute 'gulp deploy' do
-  cwd root_path
-  user node['taiga']['user']
+execute 'gulp install' do
+  action :nothing
+  user node['taiga']['service_user']
 end
